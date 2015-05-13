@@ -64,14 +64,16 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
      * set template object
      */
     function initTemplateHelper($tpl=null){
-        if(is_null($tpl)){
-           $tplFolder = ($this->forward->get(_TEMPLATE_DIR))?
-             $this->forward->get(_TEMPLATE_DIR)
-            :p\getOption(_TEMPLATE_DIR);
-           $tpl = new _PMVC_BASE_VIEW_TEMPLATE($tplFolder);
+        if(!$this->_tpl){
+            if(is_null($tpl)){
+               $tplFolder = ($this->forward->get(_TEMPLATE_DIR))
+                ? $this->forward->get(_TEMPLATE_DIR)
+                : p\getOption(_TEMPLATE_DIR);
+               $tpl = new _PMVC_BASE_VIEW_TEMPLATE($tplFolder);
+            }
+            $this->_tpl=$tpl;
         }
-        $this->_tpl=$tpl;
-        return $tpl;
+        return $this->_tpl;
     }
 
     /**
@@ -79,8 +81,7 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
      */
     function getTplFile(){
         $tplFileName = $this->forward->getPath();
-        $useTheme = $this->forward->useTheme; 
-        return $this->_tpl->getFile($tplFileName,$useTheme);
+        return $this->_tpl->getFile($tplFileName);
     }
 
 
