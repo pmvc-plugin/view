@@ -1,7 +1,8 @@
 <?php
+namespace PMVC\PlugIn\View;
 use PMVC as p;
 
-${_INIT_CONFIG}[_CLASS] = '_PMVC_VIEWENGINE';
+${_INIT_CONFIG}[_CLASS] = 'PMVC\PlugIn\View\_PMVC_VIEWENGINE';
 
 class _PMVC_VIEWENGINE extends p\PLUGIN{
     function update($observer=null,$state=null){
@@ -13,7 +14,7 @@ class _PMVC_VIEWENGINE extends p\PLUGIN{
 /**
  * base view engine
  */
-class _PMVC_BASE_VIEW extends p\PLUGIN
+class VIEW extends p\PLUGIN
 {
     /**
      * @var object
@@ -66,7 +67,7 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
     function initTemplateHelper($tplFolder,$tpl=null){
         if(!$this->_tpl){
             if(is_null($tpl)){
-               $tpl = new _PMVC_BASE_VIEW_TEMPLATE($tplFolder);
+               $tpl = new TEMPLATE($tplFolder);
             }
             $this->_tpl=$tpl;
         }
@@ -86,7 +87,7 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
 /**
  * base View Template
  */
-class _PMVC_BASE_VIEW_TEMPLATE {
+class TEMPLATE {
 
     /**
      * @var string
@@ -152,7 +153,7 @@ class _PMVC_BASE_VIEW_TEMPLATE {
 /**
  * the base componet
  */
-class _PMVC_BASE_COMPONENT extends p\PLUGIN {
+class COMPONENT extends p\PLUGIN {
 
     /**
      * direct echo it
