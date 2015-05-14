@@ -18,17 +18,17 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
     /**
      * @var object
      */
-    var $_tpl;
+    private $_tpl;
 
     /**
      * @var object
      */
-    var $forward;
+    public $path;
 
     /**
-     * @var array store attribute
+     * @var object
      */
-    var $attribute;
+    public $folder;
 
     function process(){}
     function &getInstance(){}
@@ -63,12 +63,9 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
     /**
      * set template object
      */
-    function initTemplateHelper($tpl=null){
+    function initTemplateHelper($tplFolder,$tpl=null){
         if(!$this->_tpl){
             if(is_null($tpl)){
-               $tplFolder = ($this->forward->get(_TEMPLATE_DIR))
-                ? $this->forward->get(_TEMPLATE_DIR)
-                : p\getOption(_TEMPLATE_DIR);
                $tpl = new _PMVC_BASE_VIEW_TEMPLATE($tplFolder);
             }
             $this->_tpl=$tpl;
@@ -79,9 +76,8 @@ class _PMVC_BASE_VIEW extends p\PLUGIN
     /**
      * get Tpl
      */
-    function getTplFile(){
-        $tplFileName = $this->forward->getPath();
-        return $this->_tpl->getFile($tplFileName);
+    function getTplFile($path){
+        return $this->_tpl->getFile($path);
     }
 
 
