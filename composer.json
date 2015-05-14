@@ -1,0 +1,18 @@
+{
+    "name": "pmvc-plugin/view",
+    "description": "PMVC official view engine",
+    "type": "library",
+    "homepage": "https://github.com/pmvc-plugin/view",
+    "keywords": ["view", "pmvc", "plug", "plug-in"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hill",
+            "email": "hill@kimo.com"
+        }
+    ],
+    "require": {
+        "pmvc/pmvc": "*"
+    },
+    "minimum-stability": "dev"
+}
