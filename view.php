@@ -119,10 +119,12 @@ class TEMPLATE {
             $r=p\l($pathFile,_INIT_CONFIG);
             $this->path=$r->var[_INIT_CONFIG];
         }
-        $defaultPathFile = p\transparent('themes/').'/config/path.php';
-        if(p\realpath($defaultPathFile)){
-            $r=p\l($defaultPathFile,_INIT_CONFIG);
-            $this->path = p\mergeDefault($r->var[_INIT_CONFIG],$this->path);
+        if(function_exists('PMVC\transparent')){
+            $defaultPathFile = p\transparent('themes/').'/config/path.php';
+            if(p\realpath($defaultPathFile)){
+                $r=p\l($defaultPathFile,_INIT_CONFIG);
+                $this->path = p\mergeDefault($r->var[_INIT_CONFIG],$this->path);
+            }
         }
     }
 
@@ -137,7 +139,11 @@ class TEMPLATE {
     * get tpl files from path
     */
     function getFile($tpl_name){
-        return $this->path[$tpl_name];
+        if(!empty($this->path[$tpl_name])){
+            return $this->path[$tpl_name];
+        }else{
+            return $this->path['index'];
+        }
     }
 
     /**
