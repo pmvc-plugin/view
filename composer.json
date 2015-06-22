@@ -3,7 +3,7 @@
     "description": "PMVC official view engine",
     "type": "library",
     "homepage": "https://github.com/pmvc-plugin/view",
-    "keywords": ["view", "pmvc", "plug", "plug-in"],
+    "keywords": ["view", "pmvc", "plug-in"],
     "license": "MIT",
     "authors": [
         {
@@ -13,6 +13,11 @@
     ],
     "require": {
         "pmvc/pmvc": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PMVC\\PlugIn\\view\\": "./src"
+        }
     },
     "minimum-stability": "dev"
 }
