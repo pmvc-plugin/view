@@ -40,7 +40,7 @@ class ViewEngine extends p\PlugIn
                && ('auto'==$config['type'] || 'cache'==$config['type'])
             ){
                 $oCache->regNoCache($name,$config);
-                $this->set($name,'<!--no-cache-'.$name.'-->');
+                $this[$name] = '<!--no-cache-'.$name.'-->';
                 return;
             }
         }

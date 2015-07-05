@@ -28,7 +28,7 @@ class Template {
             $r->var[_INIT_CONFIG]['themeDir'] = $dir;
             $view = p\plug('view');
             foreach($r[1][_INIT_CONFIG] as $k=>$v){
-                $view->set($k,$v);   
+                $view[$k]=$v;   
             }
         }
         $pathFile = $dir.'config/path.php';
@@ -51,7 +51,7 @@ class Template {
      * get configure
      */ 
     function get($k){
-        return p\plug('view')->get($k);
+        return p\plug('view')[$k];
     }
 
     /**
@@ -71,6 +71,6 @@ class Template {
     function getDir(){
         return $this->get('themeDir');
     }
-} //end class _PMVC_BASE_VIEW_TEMPLATE
+} //end class Template
 
 

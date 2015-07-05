@@ -18,7 +18,7 @@ class Component extends p\PLUGIN {
      * use in view
      */
     function view(){
-        p\plug('view')->set($this->name,$this->getHtml());
+        p\plug('view')[$this->name]=$this->getHtml();
     }
 
     /**
