@@ -12,6 +12,11 @@ class ViewEngine extends p\PlugIn
     private $_tpl;
 
     /**
+     * view variable
+     */
+     private $_view;
+
+    /**
      * @var object
      */
     public $forward;
@@ -28,6 +33,22 @@ class ViewEngine extends p\PlugIn
 
     function process(){}
     function &getInstance(){}
+
+    /**
+     * get veiw
+     */
+     function &get ($k=null)
+     {
+        return p\get($this->_view, $k);
+     }
+
+    /**
+     * set veiw
+     */
+     function set ($k, $v=null)
+     {
+        return p\set($this->_view, $k, $v);
+     }
 
     /**
      * for view componet
