@@ -14,7 +14,7 @@ class ViewEngine extends p\PlugIn
     /**
      * view variable
      */
-     private $_view;
+     private $_view=array();
 
     /**
      * @var object
@@ -49,6 +49,14 @@ class ViewEngine extends p\PlugIn
      {
         return p\set($this->_view, $k, $v);
      }
+
+    /**
+     * clean veiw
+     */
+    public function clean($k=null)
+    {
+        return p\clean($this->_view, $k);
+    }
 
     /**
      * for view componet
