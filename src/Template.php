@@ -12,38 +12,29 @@ class Template {
      public $name;
 
     /**
-     * @var string $path
+     * @var array $paths
      */
-     public $path;
+     public $paths;
 
     /**
      * default funciton
      */
     function __construct($name){
         $this->name = $name;
-        $dir = p\lastSlash($this->name);
+        $dir = p\lastSlash(p\realpath($this->name));
         $configFile = $dir.'config/config.php';
         if(p\realpath($configFile)){
             $r=p\l($configFile,_INIT_CONFIG);
-            $r->var[_INIT_CONFIG]['themeDir'] = $dir;
             $view = p\plug('view');
-            foreach($r[1][_INIT_CONFIG] as $k=>$v){
-                $view[$k]=$v;   
-            }
+            p\set($view, $r->var[_INIT_CONFIG]);
+            $view['themeDir'] = $dir;
         }
         $pathFile = $dir.'config/path.php';
         if (p\realpath($pathFile)) {
             $r=p\l($pathFile,_INIT_CONFIG);
-            $this->path=$r->var[_INIT_CONFIG];
+            $this->paths=$r->var[_INIT_CONFIG];
         } else {
             trigger_error('Can\'t find theme path config file  ('.$pathFile.')');
-        }
-        if(function_exists('PMVC\transparent')){
-            $defaultPathFile = p\transparent('themes/').'/config/path.php';
-            if(p\realpath($defaultPathFile)){
-                $r=p\l($defaultPathFile,_INIT_CONFIG);
-                $this->path = p\mergeDefault($r->var[_INIT_CONFIG],$this->path);
-            }
         }
     }
 
@@ -58,10 +49,10 @@ class Template {
     * get tpl files from path
     */
     function getFile($tpl_name){
-        if(!empty($this->path[$tpl_name])){
-            return $this->path[$tpl_name];
+        if(!empty($this->paths[$tpl_name])){
+            return $this->paths[$tpl_name];
         }else{
-            return $this->path['index'];
+            return $this->paths['index'];
         }
     }
 

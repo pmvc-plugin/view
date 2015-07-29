@@ -16,23 +16,24 @@ class ViewEngine extends p\PlugIn
      */
      private $_view=array();
 
-    /**
-     * @var object
-     */
-    public $forward;
-
-    /**
-     * @var object
-     */
-    public $path;
-
-    /**
-     * @var object
-     */
-    public $folder;
-
     function process(){}
     function &getInstance(){}
+
+    /**
+     * Set theme path
+     */
+    function setThemePath($val)
+    {
+        $this['themePath'] = $val;
+    }
+
+    /**
+     * Set theme folder
+     */
+    function setThemeFolder($val)
+    {
+        $this['themeDir'] = $val;
+    }
 
     /**
      * get veiw
