@@ -24,8 +24,10 @@ class ViewEngine extends p\PlugIn
      */
     function setThemePath($val)
     {
+        if (!isset($this['themePath'])) {
+            $this->set('themePath',$val);
+        }
         $this['themePath'] = $val;
-        $this->set('themePath',$val);
     }
 
     /**
