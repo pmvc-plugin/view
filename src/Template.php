@@ -48,11 +48,15 @@ class Template {
     /**
     * get tpl files from path
     */
-    function getFile($tpl_name){
+    function getFile($tpl_name, $useDefault = true){
         if(!empty($this->paths[$tpl_name])){
             return $this->paths[$tpl_name];
         }else{
-            return $this->paths['index'];
+            if ($useDefault) {
+                return $this->paths['index'];
+            } else {
+                return null;
+            }
         }
     }
 

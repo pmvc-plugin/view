@@ -105,8 +105,8 @@ class ViewEngine extends p\PlugIn
     /**
      * get Tpl
      */
-    function getTplFile($path){
-        return $this->_tpl->getFile($path);
+    function getTplFile($path, $useDefault = true){
+        return $this->_tpl->getFile($path, $useDefault);
     }
 
 
