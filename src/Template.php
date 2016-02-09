@@ -39,13 +39,6 @@ class Template {
     }
 
     /**
-     * get configure
-     */ 
-    function get($k){
-        return p\plug('view')[$k];
-    }
-
-    /**
     * get tpl files from path
     */
     function getFile($tpl_name, $useDefault = true){
@@ -64,7 +57,7 @@ class Template {
      * @return themes folder
      */
     function getDir(){
-        return $this->get('themeDir');
+        return p\plug('view')('themeDir');
     }
 } //end class Template
 
