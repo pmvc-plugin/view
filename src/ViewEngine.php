@@ -21,10 +21,15 @@ class ViewEngine extends p\PlugIn
 
     /**
      * Set theme path
+     * Client site will use $this->get('themePath') for global variable
+     * Lazy load and First load will use different themePath from $this['themePath']
      */
     function setThemePath($val)
     {
-        $this->set('themePath',$val);
+        if (!isset($this['themePath'])) {
+            $this->set('themePath',$val);
+        }
+        $this['themePath'] = $val;
     }
 
     /**
