@@ -4,37 +4,25 @@ use PMVC as p;
 /**
  * base View Template
  */
-class Template {
-
-    /**
-     * @var string
-     */
-     public $name;
-
-    /**
-     * @var array $paths
-     */
-     public $paths;
-
+class Template
+{
     /**
      * default funciton
      */
-    function __construct($name){
-        $this->name = $name;
-        $dir = p\lastSlash(p\realpath($this->name));
+    function __construct(){
+        $dir = $this->getDir();
         $configFile = $dir.'config/config.php';
+        $view = p\plug('view');
         if(p\realpath($configFile)){
             $r=p\l($configFile,_INIT_CONFIG);
-            $view = p\plug('view');
             p\set($view, $r->var[_INIT_CONFIG]);
-            $view['themeDir'] = $dir;
         }
         $pathFile = $dir.'config/path.php';
         if (p\realpath($pathFile)) {
             $r=p\l($pathFile,_INIT_CONFIG);
-            $this->paths=$r->var[_INIT_CONFIG];
+            $view['paths']=$r->var[_INIT_CONFIG];
         } else {
-            trigger_error('Can\'t find theme path config file  ('.$pathFile.')');
+            return !trigger_error('Can\'t find theme path config file  ('.$pathFile.')');
         }
     }
 
@@ -42,11 +30,12 @@ class Template {
     * get tpl files from path
     */
     function getFile($tpl_name, $useDefault = true){
-        if(!empty($this->paths[$tpl_name])){
-            return $this->paths[$tpl_name];
+        $view = p\plug('view');
+        if(!empty($view['paths'][$tpl_name])){
+            return $view['paths'][$tpl_name];
         }else{
             if ($useDefault) {
-                return $this->paths['index'];
+                return $view['paths']['index'];
             } else {
                 return null;
             }
@@ -57,7 +46,7 @@ class Template {
      * @return themes folder
      */
     function getDir(){
-        return p\plug('view')('themeDir');
+        return p\plug('view')['themeDir'];
     }
 } //end class Template
 

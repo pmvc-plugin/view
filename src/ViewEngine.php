@@ -37,7 +37,11 @@ class ViewEngine extends p\PlugIn
      */
     function setThemeFolder($val)
     {
-        $this['themeDir'] = $val;
+        $val = p\realpath($val);
+        if (!$val) {
+            return !trigger_error('Can\'t find theme path  ('.$val.')');
+        }
+        $this['themeDir'] = p\lastSlash($val);
     }
 
     /**
@@ -94,10 +98,10 @@ class ViewEngine extends p\PlugIn
     /**
      * set template object
      */
-    function initTemplateHelper($tplFolder,$tpl=null){
+    function initTemplateHelper($tpl=null){
         if(!$this->_tpl){
             if(is_null($tpl)){
-               $tpl = new Template($tplFolder);
+               $tpl = new Template();
             }
             $this->_tpl=$tpl;
         }
