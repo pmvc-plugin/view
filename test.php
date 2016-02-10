@@ -18,10 +18,9 @@ class ViewTest extends PHPUnit_Framework_TestCase
             _CLASS=>'FakeTemplate'
         ));
         $path = './test/fakeTpl';
-        $view->setThemeFolder($path);
-        $view->initTemplateHelper(); 
+        $view->initTemplateHelper($path); 
         $tpl = $view->getTpl();
-        $this->assertEquals(\PMVC\lastSlash(\PMVC\realpath($path)),$tpl->getDir());
+        $this->assertEquals(\PMVC\lastSlash(\PMVC\realpath($path)),$tpl->folder);
     }
 }
 
