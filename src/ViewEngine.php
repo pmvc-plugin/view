@@ -6,7 +6,7 @@ use PMVC as p;
 /**
  * base view engine
  */
-class ViewEngine extends p\PlugIn
+abstract class ViewEngine extends p\PlugIn
 {
     /**
      * @var object
@@ -18,9 +18,7 @@ class ViewEngine extends p\PlugIn
      */
     private $_view=array();
 
-    public function process()
-    {
-    }
+    abstract public function process();
 
     public function &getInstance()
     {
