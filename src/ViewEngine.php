@@ -61,6 +61,20 @@ abstract class ViewEngine extends p\PlugIn
          return p\set($this->_view, $k, $v);
      }
 
+     /**
+      * Append. 
+      */
+     public function append($k, $v=null)
+     {
+        if (is_null($v)) {
+            return;
+        }
+        $this->_view[$k] = array_merge(
+            \PMVC\value($this->_view,[$k],[]),
+            \PMVC\toArray($v)
+        );
+     }
+
     /**
      * clean veiw
      */
