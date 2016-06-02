@@ -8,12 +8,6 @@ use PMVC as p;
  */
 class Template
 {
-
-    /**
-     * @var string 
-     */
-     public $folder;
-
     /**
      * @var array
      */
@@ -28,24 +22,18 @@ class Template
      * Default funciton
      */
     function __construct($folder){
-        $folder = p\realpath($folder);
-        if (!$folder) {
-            return !trigger_error('Can\'t find theme path  ('.$folder.')');
-        }
-        $folder = p\lastSlash($folder);
-        $configFile = $folder.'config/config.php';
+        $configFile = $folder.'/config/config.php';
         if(p\realpath($configFile)){
             $r=p\l($configFile,_INIT_CONFIG);
             $this->configs =& $r->var[_INIT_CONFIG]; 
         }
-        $pathFile = $folder.'config/path.php';
+        $pathFile = $folder.'/config/path.php';
         if (p\realpath($pathFile)) {
             $r=p\l($pathFile,_INIT_CONFIG);
             $this->paths =& $r->var[_INIT_CONFIG];
         } else {
             return !trigger_error('Can\'t find theme path config file  ('.$pathFile.')');
         }
-        $this->folder = $folder;
     }
 
     /**
