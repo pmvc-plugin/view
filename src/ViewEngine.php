@@ -42,7 +42,10 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function setThemeFolder($val)
     {
-        $this['themeDir'] = $val;
+        $this['themeDir'] = \PMVC\realpath($val);
+        if (!$this['themeDir']) {
+            return !trigger_error('Template folder was not found: ['.$this['themeDir'].']');
+        }
     }
 
     /**
