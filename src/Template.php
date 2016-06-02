@@ -52,14 +52,16 @@ class Template
     * Get tpl files from path
     */
     function getFile($tpl_name, $useDefault = true){
+        $file = null;
         if(!empty($this->paths[$tpl_name])){
-            return $this->paths[$tpl_name];
-        }else{
-            if ($useDefault) {
-                return $this->paths['index'];
-            } else {
-                return null;
-            }
+            $file = $this->paths[$tpl_name];
+        } elseif ($useDefault) {
+            $file =  $this->paths['index'];
+        }
+        if (!empty($file)) {
+            return p\realpath($file);
+        } else {
+            return null;
         }
     }
 
