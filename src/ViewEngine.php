@@ -4,7 +4,11 @@ namespace PMVC\PlugIn\view;
 use PMVC as p;
 
 /**
- * base view engine
+ * Base view engine.
+ *
+ * @parameters string themeFolder
+ * @parameters string themePath
+ * @parameters string headers 
  */
 abstract class ViewEngine extends p\PlugIn
 {
@@ -22,6 +26,11 @@ abstract class ViewEngine extends p\PlugIn
 
     public function &getInstance()
     {
+    }
+
+    public function __construct()
+    {
+        $this['headers'] = [];
     }
 
     /**
