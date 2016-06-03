@@ -44,7 +44,7 @@ abstract class ViewEngine extends p\PlugIn
     {
         $this['themeFolder'] = \PMVC\realpath($val);
         if (!$this['themeFolder']) {
-            return !trigger_error('Template folder was not found: ['.$this['themeFolder'].']');
+            return !trigger_error('Template folder was not found: ['.$val.']');
         }
     }
 
