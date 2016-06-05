@@ -3,6 +3,8 @@ namespace PMVC\PlugIn\view;
 
 use PMVC as p;
 
+const themePath = 'themePath';
+
 /**
  * Base view engine.
  *
@@ -35,15 +37,15 @@ abstract class ViewEngine extends p\PlugIn
 
     /**
      * Set theme path
-     * Client site will use $this->get('themePath') for global variable
-     * Lazy load and First load will use different themePath from $this['themePath']
+     * ViewEngine will use $this->get('themePath') for global variable and use to include file
+     * Template variable will use different themePath from $this['themePath'].
      */
     public function setThemePath($val)
     {
-        if (!isset($this['themePath'])) {
-            $this->set('themePath', $val);
+        if (!isset($this[themePath])) {
+            $this->set(themePath, $val);
         }
-        $this['themePath'] = $val;
+        $this[themePath] = $val;
     }
 
     /**
