@@ -11,12 +11,7 @@ class Template
     /**
      * @var array
      */
-     public $configs = array();
-
-    /**
-     * @var array
-     */
-     public $paths;
+     private $_configs = [];
 
     /**
      * Default funciton
@@ -25,14 +20,9 @@ class Template
         $configFile = $folder.'/config/config.php';
         if(p\realpath($configFile)){
             $r=p\l($configFile,_INIT_CONFIG);
-            $this->configs =& $r->var[_INIT_CONFIG]; 
-        }
-        $pathFile = $folder.'/config/path.php';
-        if (p\realpath($pathFile)) {
-            $r=p\l($pathFile,_INIT_CONFIG);
-            $this->paths =& $r->var[_INIT_CONFIG];
+            $this->_configs =& $r->var[_INIT_CONFIG]; 
         } else {
-            return !trigger_error('Can\'t find theme path config file  ('.$pathFile.')');
+            return !trigger_error('Can\'t find theme config file  ('.$configFile.')');
         }
     }
 
@@ -41,11 +31,7 @@ class Template
      */ 
      function &__invoke()
      {
-        $arr =  array_merge(
-            $this->configs,
-            array('paths'=>$this->paths)
-        );
-        return $arr;
+        return $this->_configs;
      }
 
     /**
@@ -53,10 +39,11 @@ class Template
     */
     function getFile($tpl_name, $useDefault = true){
         $file = null;
-        if(!empty($this->paths[$tpl_name])){
-            $file = $this->paths[$tpl_name];
+        $paths = p\value($this->_configs,['paths']);
+        if(!empty($paths[$tpl_name])){
+            $file = $paths[$tpl_name];
         } elseif ($useDefault) {
-            $file =  $this->paths['index'];
+            $file =  p\value($paths,['index']);
         }
         if (!empty($file)) {
             return p\realpath($file);
