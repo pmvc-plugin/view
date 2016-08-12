@@ -14,10 +14,23 @@ class view extends p\PlugIn
 
     public function init()
     {
-        $this->change(p\getOption(_VIEW_ENGINE));
+        $this->_change(p\getOption(_VIEW_ENGINE));
+        p\callPlugin(
+            'dispatcher',
+            'attach',
+            [ 
+                $this,
+                'SetConfig__view_engine_',
+            ]
+        );
     }
 
-    public function change($viewEngine)
+    public function SetConfig__view_engine_($subject)
+    {
+        $this->_change(p\getOption(_VIEW_ENGINE));
+    }
+
+    private function _change($viewEngine)
     {
         $this->_view = 'view_'.$viewEngine;
         if (!p\plug($this->_view, [\PMVC\PAUSE=>true])) {
@@ -27,6 +40,7 @@ class view extends p\PlugIn
 
     public function update(SplSubject $SplSubject=null)
     {
+        parent::update($SplSubject);
         return p\plug($this->_view);
     }
 }
