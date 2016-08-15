@@ -60,6 +60,17 @@ abstract class ViewEngine extends p\PlugIn
     }
 
     /**
+     * Append View
+     */
+    public function appendView(array $arr)
+    {
+        $this->_view = array_merge_recursive(
+            $this->_view,
+            $arr
+        );
+    }
+
+    /**
      * get veiw
      */
      public function &get($k=null)
