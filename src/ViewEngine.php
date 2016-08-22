@@ -112,7 +112,14 @@ abstract class ViewEngine extends p\PlugIn
                 $tpl = new Template($this['themeFolder']);
             }
             $this->_tpl = $tpl;
-            p\set($this,$tpl());
+            p\set($this, $tpl());
+            $copykeys = ['assetsRoot'];
+            foreach ($copykeys as $key) {
+                $v = $this->get($key);
+                if (!is_null($v)) {
+                    $this[$key] = $v;
+                }
+            }
         }
         return $this->_tpl;
     }
