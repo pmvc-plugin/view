@@ -19,7 +19,7 @@ PMVC View template
          * 5. Set all above configs to template variable.
    * 3. Running view process
       * View engine will extra specific tpl config to plugin config
-      * Specific keys such as 'assetsRoot' will copy to template variable which the variable not exists in template variable.
+      * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin from view_config_helper.
    
 
 
