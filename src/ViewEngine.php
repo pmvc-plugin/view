@@ -37,8 +37,10 @@ abstract class ViewEngine extends p\PlugIn
 
     /**
      * Set theme path
-     * ViewEngine will use $this->get('themePath') for global variable and use to include file
-     * Template variable will use different themePath from $this['themePath'].
+     * $this['themePaht'] : plugin config
+     * $this->get('themePath') : template varible 
+     * Template variable will only set once, and will pass to client.
+     * Plugin config could set multi times, and will not pass to client.
      */
     public function setThemePath($val)
     {
@@ -113,20 +115,23 @@ abstract class ViewEngine extends p\PlugIn
             }
             $this->_tpl = $tpl;
             p\set($this, $tpl());
-            /* Copy plug config to tpl config */
-            $copykeys = ['assetsRoot'];
-            foreach ($copykeys as $key) {
-                $v = $this->get($key);
-                if (!is_null($v)) {
-                    $this[$key] = $v;
-                }
-            }
+        }
+        /*
+            Copy tpl variables back to plugin config
+            if there are custom variables from view_config_helper  
+        */
+        $copykeys = ['assetsRoot'];
+        foreach ($copykeys as $key) {
+            $v = p\value($this->_view,[$key]); 
+            if (!is_null($v)) {
+                $this[$key] = $v;
+            } 
         }
         return $this->_tpl;
     }
 
     /**
-     * get Tpl
+     * Get Tpl
      */
     public function getTplFile($path, $useDefault = true)
     {
