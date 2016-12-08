@@ -113,6 +113,7 @@ abstract class ViewEngine extends p\PlugIn
             }
             $this->_tpl = $tpl;
             p\set($this, $tpl());
+            /* Copy plug config to tpl config */
             $copykeys = ['assetsRoot'];
             foreach ($copykeys as $key) {
                 $v = $this->get($key);
