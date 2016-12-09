@@ -14,7 +14,7 @@ PMVC View template
       * If plug view_config_helper
          * 1. get configs from .env.view
          * 2. merge global option 'VIEW' with configs
-         * 3. merge global option 'I18N' with configs['I18N']
+         * 3. merge global option 'I18N' with VIEW['I18N']
          * 4. if have view_config_helper callback will cook $config by callback
          * 5. Set all above configs to template variable.
    * 3. Running view process
