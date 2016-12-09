@@ -140,7 +140,6 @@ abstract class ViewEngine extends p\PlugIn
 
     public function flush()
     {
-        ob_flush();
         flush();
     }
 } //end class
