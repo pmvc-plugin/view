@@ -137,4 +137,10 @@ abstract class ViewEngine extends p\PlugIn
     {
         return $this->_tpl->getFile($path, $useDefault);
     }
+
+    public function flush()
+    {
+        ob_flush();
+        flush();
+    }
 } //end class
