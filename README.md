@@ -12,10 +12,10 @@ PMVC View template
       * App assign params to template variable by logic
    * 2. Before process view
       * If plug view_config_helper
-         * 1. get configs from .env.view
-         * 2. merge global option 'VIEW' with configs
-         * 3. merge global option 'I18N' with VIEW['I18N']
-         * 4. if have view_config_helper callback will cook $config by callback
+         * 1. Load global option 'VIEW'.
+         * 2. Merge global option 'I18N' with VIEW['I18N']
+         * 3. Get configs from .env.view and merge to configs, it's useful when you need develop and overwrite remote configs.
+         * 4. If have view_config_helper callback will cook $config by callback
          * 5. Set all above configs to template variable.
    * 3. Running view process
       * View engine will extra specific tpl config to plugin config
