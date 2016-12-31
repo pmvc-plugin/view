@@ -20,8 +20,10 @@ PMVC View template
    * 3. Running view process
       * View engine will extra specific tpl config to plugin config
       * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin from view_config_helper.
-   
 
+## Purpose
+   * Use __invoke to get other framework object instance
+      * https://github.com/pmvc-plugin/view/blob/master/src/ViewEngine.php#L29-L32
 
 ## Install with Composer
 ### 1. Download composer
