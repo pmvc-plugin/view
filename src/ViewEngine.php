@@ -25,10 +25,11 @@ abstract class ViewEngine extends p\PlugIn
     private $_view=array();
 
     abstract public function process();
-
-    public function &getInstance()
-    {
-    }
+    
+    /**
+     * Purpose to use __invoke for get instance
+     * if u use another template framework
+     */
 
     public function __construct()
     {
@@ -64,7 +65,7 @@ abstract class ViewEngine extends p\PlugIn
     /**
      * Append View
      */
-    public function appendView(array $arr)
+    public function append(array $arr)
     {
         $this->_view = array_merge_recursive(
             $this->_view,
