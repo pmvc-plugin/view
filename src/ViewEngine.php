@@ -2,8 +2,9 @@
 namespace PMVC\PlugIn\view;
 
 use PMVC as p;
+use DomainException;
 
-const themePath = 'themePath';
+const THEME_PATH = 'themePath';
 
 /**
  * Base view engine.
@@ -45,10 +46,10 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function setThemePath($val)
     {
-        if (!isset($this[themePath])) {
-            $this->set(themePath, $val);
+        if (!isset($this[THEME_PATH])) {
+            $this->set(THEME_PATH, $val);
         }
-        $this[themePath] = $val;
+        $this[THEME_PATH] = $val;
     }
 
     /**
@@ -58,7 +59,7 @@ abstract class ViewEngine extends p\PlugIn
     {
         $this['themeFolder'] = \PMVC\realpath($val);
         if (!$this['themeFolder']) {
-            return !trigger_error('Template folder was not found: ['.$val.']');
+            throw new DomainException('Template folder was not found: ['.$val.']');
         }
     }
 
