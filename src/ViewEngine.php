@@ -144,4 +144,15 @@ abstract class ViewEngine extends p\PlugIn
     {
         flush();
     }
+
+    public function disable()
+    {
+       $this['run']=false;
+    }
+
+    public function enable()
+    {
+       unset($this['run']);
+       unset($this['themePath']);
+    }
 } //end class
