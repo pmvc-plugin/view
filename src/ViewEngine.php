@@ -118,11 +118,12 @@ abstract class ViewEngine extends p\PlugIn
             $this->_tpl = $tpl;
             p\set($this, $tpl());
         }
-        /*
-            Copy tpl variables back to plugin config
-            if there are custom variables from view_config_helper  
-        */
-        $copykeys = ['assetsRoot'];
+
+        /**
+         *   Copy tpl variables back to plugin config
+         *   if there are custom variables from view_config_helper  
+         */
+        $copykeys = ['assetsRoot', 'staticVersion'];
         foreach ($copykeys as $key) {
             $v = p\value($this->_view,[$key]); 
             if (!is_null($v)) {
