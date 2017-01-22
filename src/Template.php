@@ -38,12 +38,10 @@ class Template
     * Get tpl files from path
     */
     function getFile($tpl_name, $useDefault = true){
-        $file = null;
-        $paths = p\value($this->_configs,['paths']);
-        if(!empty($paths[$tpl_name])){
-            $file = $paths[$tpl_name];
-        } elseif ($useDefault) {
-            $file =  p\value($paths,['index']);
+        $paths = p\get($this->_configs,'paths');
+        $file = p\get($paths, $tpl_name); 
+        if (empty($file) && $useDefault) {
+            $file = p\get($paths, 'index'); 
         }
         if (!empty($file)) {
             return p\realpath($file);
