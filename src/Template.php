@@ -39,6 +39,9 @@ class Template
     */
     function getFile($tpl_name, $useDefault = true){
         $paths = p\get($this->_configs,'paths');
+        if (is_null($tpl_name)) {
+            $tpl_name = '';
+        }
         $file = p\get($paths, $tpl_name); 
         if (empty($file) && $useDefault) {
             $file = p\get($paths, 'index'); 
