@@ -116,7 +116,7 @@ abstract class ViewEngine extends p\PlugIn
                 $tpl = new Template($this['themeFolder']);
             }
             $this->_tpl = $tpl;
-            p\set($this, $tpl());
+            $this[[]] = $tpl(); //append
         }
 
         /**
