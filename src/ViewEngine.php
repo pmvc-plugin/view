@@ -75,6 +75,17 @@ abstract class ViewEngine extends p\PlugIn
     }
 
     /**
+     * Prepend View
+     */
+    public function prepend(array $arr)
+    {
+        $this->_view = array_merge_recursive(
+            $arr,
+            $this->_view
+        );
+    }
+
+    /**
      * get veiw
      */
      public function &get($k=null)
