@@ -23,7 +23,7 @@ abstract class ViewEngine extends p\PlugIn
     /**
      * view variable
      */
-    private $_view=array();
+    private $_view;
 
     abstract public function process();
     
@@ -35,6 +35,7 @@ abstract class ViewEngine extends p\PlugIn
     public function __construct()
     {
         $this['headers'] = [];
+        $this->_view = new \PMVC\HashMap();
     }
 
     /**
@@ -68,10 +69,7 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function append(array $arr)
     {
-        $this->_view = array_merge_recursive(
-            $this->_view,
-            $arr
-        );
+        $this->_view[[]] = $arr;
     }
 
     /**
@@ -79,27 +77,33 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function prepend(array $arr)
     {
-        $this->_view = array_merge_recursive(
+        $_view =& \PMVC\get($this->_view);
+        $_view = array_merge_recursive(
             $arr,
-            $this->_view
+            $_view
         );
+    }
+
+    public function getRef()
+    {
+        return $this->_view;
     }
 
     /**
      * get veiw
      */
-     public function &get($k=null)
-     {
-         return p\get($this->_view, $k);
-     }
+    public function &get($k=null)
+    {
+        return p\get($this->_view, $k);
+    }
 
     /**
      * set veiw
      */
-     public function set($k, $v=null)
-     {
-         return p\set($this->_view, $k, $v);
-     }
+    public function set($k, $v=null)
+    {
+        return p\set($this->_view, $k, $v);
+    }
 
     /**
      * clean veiw
@@ -136,7 +140,7 @@ abstract class ViewEngine extends p\PlugIn
          */
         $copykeys = ['assetsRoot', 'staticVersion'];
         foreach ($copykeys as $key) {
-            $v = p\value($this->_view,[$key]); 
+            $v = p\value($this->_view, [$key]); 
             if (!is_null($v)) {
                 $this[$key] = $v;
             } 
@@ -159,12 +163,12 @@ abstract class ViewEngine extends p\PlugIn
 
     public function disable()
     {
-       $this['run']=false;
+        $this['run']=false;
     }
 
     public function enable()
     {
-       unset($this['run']);
-       unset($this['themePath']);
+        unset($this['run']);
+        unset($this['themePath']);
     }
 } //end class
