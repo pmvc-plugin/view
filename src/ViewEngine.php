@@ -2,6 +2,7 @@
 namespace PMVC\PlugIn\view;
 
 use PMVC as p;
+use PMVC\HashMap;
 use DomainException;
 
 const THEME_PATH = 'themePath';
@@ -35,7 +36,7 @@ abstract class ViewEngine extends p\PlugIn
     public function __construct()
     {
         $this['headers'] = [];
-        $this->_view = new \PMVC\HashMap();
+        $this->_view = new HashMap();
     }
 
     /**
@@ -58,7 +59,7 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function setThemeFolder($val)
     {
-        $this['themeFolder'] = \PMVC\realpath($val);
+        $this['themeFolder'] = p\realpath($val);
         if (!$this['themeFolder']) {
             throw new DomainException('Template folder was not found: ['.$val.']');
         }
@@ -77,7 +78,7 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function prepend(array $arr)
     {
-        $_view =& \PMVC\get($this->_view);
+        $_view =& p\get($this->_view);
         $_view = array_merge_recursive(
             $arr,
             $_view
