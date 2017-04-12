@@ -25,7 +25,7 @@ class view extends p\PlugIn
         );
     }
 
-    public function SetConfig__view_engine_($subject)
+    public function onSetConfig__view_engine_($subject)
     {
         $this->_change(p\getOption(_VIEW_ENGINE));
     }
