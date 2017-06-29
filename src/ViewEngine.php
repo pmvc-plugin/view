@@ -93,9 +93,9 @@ abstract class ViewEngine extends p\PlugIn
     /**
      * get veiw
      */
-    public function &get($k=null)
+    public function &get($k=null, $default=null)
     {
-        return p\get($this->_view, $k);
+        return p\get($this->_view, $k, $default);
     }
 
     /**
