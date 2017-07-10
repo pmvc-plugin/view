@@ -99,6 +99,18 @@ abstract class ViewEngine extends p\PlugIn
     }
 
     /**
+     * get veiw
+     */
+    public function getOne($k=null, $default=null)
+    {
+        $one = p\get($this->_view, $k, $default);
+        if (is_array($one)) {
+            $one = reset($one);
+        }
+        return $one;
+    }
+
+    /**
      * set veiw
      */
     public function set($k, $v=null)
