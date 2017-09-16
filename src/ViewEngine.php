@@ -63,6 +63,7 @@ abstract class ViewEngine extends p\PlugIn
         if (!$this['themeFolder']) {
             throw new DomainException('Template folder was not found: ['.$val.']');
         }
+        $this->initTemplateHelper();
     }
 
     /**
@@ -139,13 +140,14 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function initTemplateHelper($tpl=null)
     {
-        if (!$this->_tpl) {
-            if (is_null($tpl)) {
-                $tpl = new Template($this['themeFolder']);
-            }
-            $this->_tpl = $tpl;
-            $this[[]] = $tpl(); //append
+        if (!empty($this->_tpl)) {
+            return;
         }
+        if (is_null($tpl)) {
+            $tpl = new Template($this['themeFolder']);
+        }
+        $this->_tpl = $tpl;
+        $this[[]] = $tpl(); //append
 
         /**
          *   Copy tpl variables back to plugin config

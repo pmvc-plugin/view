@@ -19,7 +19,10 @@ class Template
     function __construct($folder){
         $configFile = $folder.'/config/config.php';
         if(p\realpath($configFile)){
-            $r=p\l($configFile,_INIT_CONFIG);
+            $r=p\l(
+                $configFile,
+                _INIT_CONFIG
+            );
             $this->_configs =& $r->var[_INIT_CONFIG]; 
         } else {
             return !trigger_error('Can\'t find theme config file  ('.$configFile.')');
@@ -54,5 +57,3 @@ class Template
     }
 
 } //end class Template
-
-
