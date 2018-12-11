@@ -59,11 +59,13 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function setThemeFolder($val)
     {
-        $this['themeFolder'] = p\realpath($val);
-        if (!$this['themeFolder']) {
-            throw new DomainException('Template folder was not found: ['.$val.']');
+        if ($val) {
+          $this['themeFolder'] = p\realpath($val);
+          if (!$this['themeFolder']) {
+              throw new DomainException('Template folder was not found: ['.$val.']');
+          }
+          $this->initTemplateHelper();
         }
-        $this->initTemplateHelper();
     }
 
     /**
