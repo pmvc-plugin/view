@@ -3,6 +3,7 @@ namespace PMVC\PlugIn\view;
 
 use PMVC as p;
 use PMVC\HashMap;
+use PMVC\PlugIn;
 use DomainException;
 
 const THEME_PATH = 'themePath';
@@ -14,7 +15,7 @@ const THEME_PATH = 'themePath';
  * @parameters string themePath
  * @parameters string headers 
  */
-abstract class ViewEngine extends p\PlugIn
+abstract class ViewEngine extends PlugIn
 {
     /**
      * @var object
@@ -60,11 +61,10 @@ abstract class ViewEngine extends p\PlugIn
     public function setThemeFolder($val)
     {
         if ($val) {
-          $this['themeFolder'] = p\realpath($val);
-          if (!$this['themeFolder']) {
-              throw new DomainException('Template folder was not found: ['.$val.']');
-          }
-          $this->initTemplateHelper();
+            $this['themeFolder'] = p\realpath($val);
+            if (!$this['themeFolder']) {
+                throw new DomainException('Template folder was not found: ['.$val.']');
+            }
         }
     }
 
@@ -88,7 +88,7 @@ abstract class ViewEngine extends p\PlugIn
         );
     }
 
-    public function getRef()
+    public function &getRef()
     {
         return $this->_view;
     }
@@ -132,8 +132,11 @@ abstract class ViewEngine extends p\PlugIn
     /**
      * get template object
      */
-    public function getTpl()
+    public function getTpl($tpl=null)
     {
+        if (empty($this->_tpl)) {
+            $this->_tpl = $this->initTemplateHelper($tpl);
+        }
         return $this->_tpl;
     }
 
@@ -142,13 +145,9 @@ abstract class ViewEngine extends p\PlugIn
      */
     public function initTemplateHelper($tpl=null)
     {
-        if (!empty($this->_tpl)) {
-            return;
-        }
         if (is_null($tpl)) {
             $tpl = new Template($this['themeFolder']);
         }
-        $this->_tpl = $tpl;
         $this[[]] = $tpl(); //append
 
         /**
@@ -157,20 +156,20 @@ abstract class ViewEngine extends p\PlugIn
          */
         $copykeys = ['assetsRoot', 'staticVersion'];
         foreach ($copykeys as $key) {
-            $v = p\value($this->_view, [$key]); 
+            $v = p\get($this->_view, $key); 
             if (!is_null($v)) {
                 $this[$key] = $v;
             } 
         }
-        return $this->_tpl;
+        return $tpl;
     }
 
     /**
      * Get Tpl
      */
-    public function getTplFile($path, $useDefault = true)
+    public function getTplFile($path, $useDefault = true, $tpl = null)
     {
-        return $this->_tpl->getFile($path, $useDefault);
+        return $this->getTpl($tpl)->getFile($path, $useDefault);
     }
 
     public function flush()

@@ -11,14 +11,15 @@ class Template
     /**
      * @var array
      */
-     private $_configs = [];
+    private $_configs = [];
 
     /**
      * Default funciton
      */
-    function __construct($folder){
+    function __construct($folder)
+    {
         $configFile = $folder.'/config/config.php';
-        if(p\realpath($configFile)){
+        if(p\realpath($configFile)) {
             $r=p\l(
                 $configFile,
                 _INIT_CONFIG
@@ -32,16 +33,17 @@ class Template
     /**
      * Get configs
      */ 
-     function &__invoke()
-     {
+    function &__invoke()
+    {
         return $this->_configs;
-     }
+    }
 
     /**
-    * Get tpl files from path
-    */
-    function getFile($tpl_name, $useDefault = true){
-        $paths = p\get($this->_configs,'paths');
+     * Get tpl files from path
+     */
+    function getFile($tpl_name, $useDefault = true)
+    {
+        $paths = p\get($this->_configs, 'paths');
         if (is_null($tpl_name)) {
             $tpl_name = '';
         }
