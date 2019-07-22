@@ -33,7 +33,7 @@ class Template
     /**
      * Get configs
      */ 
-    function &__invoke()
+    function __invoke()
     {
         return $this->_configs;
     }

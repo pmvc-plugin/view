@@ -65,6 +65,9 @@ abstract class ViewEngine extends PlugIn
             if (!$this['themeFolder']) {
                 throw new DomainException('Template folder was not found: ['.$val.']');
             }
+            if (empty($this->_tpl)) {
+                $this->_tpl = $this->initTemplateHelper();
+            }
         }
     }
 
