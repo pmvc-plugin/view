@@ -84,11 +84,12 @@ abstract class ViewEngine extends PlugIn
      */
     public function prepend(array $arr)
     {
-        $_view =& p\get($this->_view);
+        $_view = p\get($this->_view);
         $_view = array_merge_recursive(
             $arr,
             $_view
         );
+        $this->_view->offsetUnset($_view);
     }
 
     public function &getRef()
