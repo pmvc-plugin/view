@@ -8,7 +8,7 @@ PMVC View template
 ===
 
 ## Explain Template variable
-   * 1. Begin
+   * 1. Initiate
       * App assign params to template variable by logic
    * 2. Before process view
       * If plug view_config_helper
