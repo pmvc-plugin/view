@@ -19,7 +19,11 @@ PMVC View template
          * 5. Set all above configs to template variable.
    * 3. Running view process
       * View engine will extra specific tpl config to plugin config
-      * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin from view_config_helper.
+      * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin config from view_config_helper.
+
+## Pass Template Folder
+user pmvc config _TEMPLATE_DIR
+https://github.com/pmvc-plugin/controller/blob/master/src/Constants.php#L48
 
 ## Purpose
    * Use __invoke to get other framework object instance
