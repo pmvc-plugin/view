@@ -11,7 +11,7 @@ PMVC View template
    * 1. Initiate
       * App assign params to template variable by logic
    * 2. Before process view
-      * If plug view_config_helper
+      * If plug [view_config_helper](https://github.com/pmvc-plugin/view_config_helper). (Why need use view_config_helper)
          * 1. Load global option 'VIEW'.
          * 2. Merge global option 'I18N' with VIEW['I18N']
          * 3. Get configs from .env.view and merge to configs, it's useful when you need develop and overwrite remote configs.
@@ -22,8 +22,8 @@ PMVC View template
       * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin config from view_config_helper.
 
 ## Pass Template Folder
-user pmvc config _TEMPLATE_DIR
-https://github.com/pmvc-plugin/controller/blob/master/src/Constants.php#L48
+* user pmvc config _TEMPLATE_DIR
+* https://github.com/pmvc-plugin/controller/blob/master/src/Constants.php#L48
 
 ## Purpose
    * Use __invoke to get other framework object instance
