@@ -29,6 +29,9 @@ PMVC View template
    * Use __invoke to get other framework object instance
       * https://github.com/pmvc-plugin/view/blob/master/src/ViewEngine.php#L29-L32
 
+## Share forward
+   * https://github.com/pmvc-plugin/default_forward
+
 ## Install with Composer
 ### 1. Download composer
    * mkdir test_folder
