@@ -1,11 +1,11 @@
 <?php
 namespace PMVC\PlugIn\view;
 
-use PHPUnit_Framework_TestCase;
+use PMVC\TestCase;
 
-class ViewEngineTest extends PHPUnit_Framework_TestCase
+class ViewEngineTest extends TestCase
 {
-    function setup()
+    function pmvc_setup()
     {
         \PMVC\unplug('view');
         \PMVC\option('set',_VIEW_ENGINE,'fake');

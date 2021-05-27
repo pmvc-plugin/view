@@ -1,11 +1,11 @@
 <?php
 namespace PMVC\PlugIn\view;
 
-use PHPUnit_Framework_TestCase;
+use PMVC\TestCase;
 
-class ViewTest extends PHPUnit_Framework_TestCase
+class ViewTest extends TestCase
 {
-    function setup()
+    function pmvc_setup()
     {
         \PMVC\unplug('view_fake');
     }
@@ -16,7 +16,7 @@ class ViewTest extends PHPUnit_Framework_TestCase
             _CLASS=>__NAMESPACE__.'\FakeTemplate'
         ));
         \PMVC\option('set',_VIEW_ENGINE,'fake');
-        $this->assertContains('view_fake',var_export(\PMVC\plug('view'),true));
+        $this->haveString('view_fake',var_export(\PMVC\plug('view'),true));
     }
 
     function testGetGetThemeDir()

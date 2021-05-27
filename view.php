@@ -33,7 +33,7 @@ class view extends p\PlugIn
     private function _change($viewEngine)
     {
         $this->_view = 'view_'.$viewEngine;
-        if (!p\plug($this->_view, [\PMVC\PAUSE=>true])) {
+        if (!p\exists($this->_view, 'plug')) {
             throw new DomainException('View engine not eixis.['.$this->_view.']'); 
         }
     }
