@@ -43,7 +43,8 @@ class Template
      */
     function getFile($tpl_name, $useDefault = true)
     {
-        $paths = p\get($this->_configs, 'paths');
+        $backendConfig = p\get($this->_configs, 'backend');
+        $paths = p\get($backendConfig, 'paths');
         if (is_null($tpl_name)) {
             $tpl_name = '';
         }
