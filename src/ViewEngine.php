@@ -13,7 +13,7 @@ const THEME_PATH = 'themePath';
  *
  * @parameters string themeFolder
  * @parameters string themePath
- * @parameters string headers 
+ * @parameters string headers
  */
 abstract class ViewEngine extends PlugIn
 {
@@ -28,7 +28,7 @@ abstract class ViewEngine extends PlugIn
     private $_view;
 
     abstract public function process();
-    
+
     /**
      * Purpose to use __invoke for get instance
      * if u use another template framework
@@ -43,7 +43,7 @@ abstract class ViewEngine extends PlugIn
     /**
      * Set theme path
      * $this['themePaht'] : plugin config
-     * $this->get('themePath') : template varible 
+     * $this->get('themePath') : template varible
      * Template variable will only set once, and will pass to client.
      * Plugin config could set multi times, and will not pass to client.
      */
@@ -63,7 +63,9 @@ abstract class ViewEngine extends PlugIn
         if ($val) {
             $this['themeFolder'] = p\realpath($val);
             if (!$this['themeFolder']) {
-                throw new DomainException('Template folder was not found: ['.$val.']');
+                throw new DomainException(
+                    'Template folder was not found: [' . $val . ']'
+                );
             }
             if (empty($this->_tpl)) {
                 $this->_tpl = $this->initTemplateHelper();
@@ -85,10 +87,7 @@ abstract class ViewEngine extends PlugIn
     public function prepend(array $arr)
     {
         $_view = p\get($this->_view);
-        $_view = array_merge_recursive(
-            $arr,
-            $_view
-        );
+        $_view = array_merge_recursive($arr, $_view);
         $this->_view->offsetUnset($_view);
     }
 
@@ -100,7 +99,7 @@ abstract class ViewEngine extends PlugIn
     /**
      * get veiw
      */
-    public function &get($k=null, $default=null)
+    public function &get($k = null, $default = null)
     {
         return p\get($this->_view, $k, $default);
     }
@@ -108,7 +107,7 @@ abstract class ViewEngine extends PlugIn
     /**
      * get veiw
      */
-    public function getOne($k=null, $default=null)
+    public function getOne($k = null, $default = null)
     {
         $one = p\get($this->_view, $k, $default);
         if (is_array($one)) {
@@ -120,7 +119,7 @@ abstract class ViewEngine extends PlugIn
     /**
      * set veiw
      */
-    public function set($k, $v=null)
+    public function set($k, $v = null)
     {
         return p\set($this->_view, $k, $v);
     }
@@ -128,7 +127,7 @@ abstract class ViewEngine extends PlugIn
     /**
      * clean veiw
      */
-    public function clean($k=null)
+    public function clean($k = null)
     {
         return p\clean($this->_view, $k);
     }
@@ -136,7 +135,7 @@ abstract class ViewEngine extends PlugIn
     /**
      * get template object
      */
-    public function getTpl($tpl=null)
+    public function getTpl($tpl = null)
     {
         if (empty($this->_tpl)) {
             $this->_tpl = $this->initTemplateHelper($tpl);
@@ -147,23 +146,25 @@ abstract class ViewEngine extends PlugIn
     /**
      * set template object
      */
-    public function initTemplateHelper($tpl=null)
+    public function initTemplateHelper($tpl = null)
     {
         if (is_null($tpl)) {
             $tpl = new Template($this['themeFolder']);
         }
-        $this[[]] = $tpl(); //append
+        $tplConfig = $tpl();
+        $this[[]] = \PMVC\get($tplConfig, 'backend', []);
+        $this->append(\PMVC\get($tplConfig, 'view', []));
 
         /**
          *   Copy tpl variables back to plugin config
-         *   if there are custom variables from view_config_helper  
+         *   if there are custom variables from view_config_helper
          */
         $copykeys = ['assetsRoot', 'staticVersion'];
         foreach ($copykeys as $key) {
-            $v = p\get($this->_view, $key); 
+            $v = p\get($this->_view, $key);
             if (!is_null($v)) {
                 $this[$key] = $v;
-            } 
+            }
         }
         return $tpl;
     }
@@ -183,7 +184,7 @@ abstract class ViewEngine extends PlugIn
 
     public function disable()
     {
-        $this['run']=false;
+        $this['run'] = false;
     }
 
     public function enable()
