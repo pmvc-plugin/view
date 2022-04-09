@@ -182,14 +182,25 @@ abstract class ViewEngine extends PlugIn
         flush();
     }
 
-    public function disable()
+    public function isEnabled()
     {
-        $this['run'] = false;
+        /**
+         * Meaning?
+         * 1. not run yet.
+         * 2. run not set to false.
+         * 3. is ready to do parse
+         */
+        return !isset($this['run']);
     }
 
     public function enable()
     {
         unset($this['run']);
         unset($this['themePath']);
+    }
+
+    public function disable()
+    {
+        $this['run'] = false;
     }
 } //end class
