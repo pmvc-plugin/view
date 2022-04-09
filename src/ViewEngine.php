@@ -179,6 +179,7 @@ abstract class ViewEngine extends PlugIn
 
     public function flush()
     {
+        ob_flush();
         flush();
     }
 
