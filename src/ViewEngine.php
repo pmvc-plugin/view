@@ -178,8 +178,10 @@ abstract class ViewEngine extends PlugIn
 
     public function flush()
     {
-        ob_get_level() > 0 && ob_flush();
-        flush();
+        if (isEnabled()) {
+            ob_get_level() > 0 && ob_flush();
+            flush();
+        }
     }
 
     public function isEnabled()
