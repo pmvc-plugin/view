@@ -30,8 +30,7 @@ ${_INIT_CONFIG}=[
   'compile' => [], // use webpack compile only
 ];
 ```
-* 
-
+* https://github.com/pmvc-plugin/view/blob/master/src/ViewEngine.php#L154-L155
 
 
 
