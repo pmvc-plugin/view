@@ -32,7 +32,7 @@ class Template
     /**
      * Get configs
      */
-    function __invoke($key = null)
+    function &__invoke($key = null)
     {
         return p\get($this->_configs, $key, $this->_configs);
     }

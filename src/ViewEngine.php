@@ -178,7 +178,7 @@ abstract class ViewEngine extends PlugIn
 
     public function flush()
     {
-        if (isEnabled()) {
+        if ($this->isEnabled()) {
             ob_get_level() > 0 && ob_flush();
             flush();
         }
