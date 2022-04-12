@@ -20,6 +20,7 @@ PMVC View template
    * 3. Running view process
       * View engine will extra specific tpl config to plugin config
       * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin config from view_config_helper.
+
 ### Explain theme config
 __Config location__ : [SiteFolder]/themes/[ThemeName]/config/config.php
 * Example: https://github.com/pmvc-theme/hello_react/blob/master/config/config.php
@@ -32,7 +33,8 @@ ${_INIT_CONFIG}=[
 ```
 * https://github.com/pmvc-plugin/view/blob/master/src/ViewEngine.php#L154-L155
 
-
+### How to handle output header?
+https://github.com/pmvc-plugin/view/wiki#how-to-config-header
 
 ## Pass Template Folder
 * user pmvc config _TEMPLATE_DIR
