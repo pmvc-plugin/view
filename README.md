@@ -20,6 +20,20 @@ PMVC View template
    * 3. Running view process
       * View engine will extra specific tpl config to plugin config
       * Specific keys such as 'assetsRoot' will copy from template variable to plugin config, if we have variabe need overwirte plugin config from view_config_helper.
+### Explain theme config
+__Config location__ : [SiteFolder]/themes/[ThemeName]/config/config.php
+* Example: https://github.com/pmvc-theme/hello_react/blob/master/config/config.php
+```php
+${_INIT_CONFIG}=[
+  'backend' => [], // will append with view plugin and use in backend.
+  'view' => [], // will append to front-end view variable, and could see it in browser (JS) level.
+  'compile' => [], // use webpack compile only
+];
+```
+* 
+
+
+
 
 ## Pass Template Folder
 * user pmvc config _TEMPLATE_DIR

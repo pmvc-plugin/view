@@ -18,24 +18,23 @@ class Template
      */
     function __construct($folder)
     {
-        $configFile = $folder.'/config/config.php';
-        if(p\realpath($configFile)) {
-            $r=p\l(
-                $configFile,
-                _INIT_CONFIG
-            );
-            $this->_configs =& $r->var[_INIT_CONFIG]; 
+        $configFile = $folder . '/config/config.php';
+        if (p\realpath($configFile)) {
+            $r = p\l($configFile, _INIT_CONFIG);
+            $this->_configs = &$r->var[_INIT_CONFIG];
         } else {
-            return !trigger_error('Can\'t find theme config file  ('.$configFile.')');
+            return !trigger_error(
+                'Can\'t find theme config file  (' . $configFile . ')'
+            );
         }
     }
 
     /**
      * Get configs
-     */ 
-    function __invoke()
+     */
+    function __invoke($key = null)
     {
-        return $this->_configs;
+        return p\get($this->_configs, $key, $this->_configs);
     }
 
     /**
@@ -43,14 +42,13 @@ class Template
      */
     function getFile($tpl_name, $useDefault = true)
     {
-        $backendConfig = p\get($this->_configs, 'backend');
-        $paths = p\get($backendConfig, 'paths');
+        $paths = p\get($this('backend'), 'paths');
         if (is_null($tpl_name)) {
             $tpl_name = '';
         }
-        $file = p\get($paths, $tpl_name); 
+        $file = p\get($paths, $tpl_name);
         if (empty($file) && $useDefault) {
-            $file = p\get($paths, 'index'); 
+            $file = p\get($paths, 'index');
         }
         if (!empty($file)) {
             return p\realpath($file);
@@ -58,5 +56,4 @@ class Template
             return null;
         }
     }
-
 } //end class Template

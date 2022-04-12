@@ -151,9 +151,8 @@ abstract class ViewEngine extends PlugIn
         if (is_null($tpl)) {
             $tpl = new Template($this['themeFolder']);
         }
-        $tplConfig = $tpl();
-        $this[[]] = \PMVC\get($tplConfig, 'backend', []);
-        $this->append(\PMVC\get($tplConfig, 'view', []));
+        $this[[]] = $tpl('backend');
+        $this->append($tpl('view'));
 
         /**
          *   Copy tpl variables back to plugin config
